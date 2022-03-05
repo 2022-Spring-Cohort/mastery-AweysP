@@ -1,17 +1,23 @@
 package com.survivingcodingbootcamp.blog;
 
+import com.survivingcodingbootcamp.blog.model.Hashtag;
 import com.survivingcodingbootcamp.blog.model.Post;
 import com.survivingcodingbootcamp.blog.model.Topic;
+import com.survivingcodingbootcamp.blog.repository.HashtagRepository;
 import com.survivingcodingbootcamp.blog.repository.PostRepository;
 import com.survivingcodingbootcamp.blog.repository.TopicRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Populator implements CommandLineRunner {
-
+    @Autowired
     private TopicRepository topicRepo;
+    @Autowired
     private PostRepository postRepo;
+    @Autowired
+    HashtagRepository hashtagRepo;
 
 
     public Populator(TopicRepository topicRepo, PostRepository postRepo) {
@@ -53,6 +59,34 @@ public class Populator implements CommandLineRunner {
         topicRepo.save(topic3);
         Topic topic4 = new Topic("Object Oriented Programming and You");
         topicRepo.save(topic4);
+
+
+        Hashtag yolo = new Hashtag("#Yolo");
+        Hashtag gore = new Hashtag("#Gore");
+        Hashtag food = new Hashtag("#Food");
+        Hashtag boring = new Hashtag("#Boring");
+        Hashtag heartwarming = new Hashtag("#Heartwarming");
+        Hashtag coolFights = new Hashtag("#Cool Fights");
+        Hashtag lotsOfFiller = new Hashtag("#Lots Of Filler");
+
+        hashtagRepo.save(yolo);
+        hashtagRepo.save(gore);
+        hashtagRepo.save(food);
+        hashtagRepo.save(boring);
+        hashtagRepo.save(heartwarming);
+        hashtagRepo.save(coolFights);
+        hashtagRepo.save(lotsOfFiller);
+
+        post1.addHashtag(yolo);
+        post2.addHashtag(boring);
+        post3.addHashtag(lotsOfFiller);
+        post1.addHashtag(gore);
+
+        postRepo.save(post1);
+        postRepo.save(post2);
+        postRepo.save(post3);
+
+
 
     }
 

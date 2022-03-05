@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${post.title}">Document</title>
+    <title >Document</title>
     <link rel="icon" href="/assets/icon.png">
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/layout.css" />
@@ -27,6 +27,24 @@
                 <p th:text="${post.content}" class="post__content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque blanditiis, aut quae fuga id quis ut. 
                     Eligendi necessitatibus blanditiis officia, odio deleniti natus molestiae fugiat ex quod vel aliquam illum.
                 </p>
+                <form th:action="'/posts/' +${post.id} + '/addhashtag'"  method="post">
+
+                    <input type="text" name="hashtag" placeholder="Add hashtag"/>
+                    <button type="submit"> Add hashtag</button>
+
+                </form>
+                <article class="showPageHash">
+                    <ul>
+                        <li th:each="Hashtag:${post.hashtags}">
+                            <a
+                                    th:href="'/hashtag/' + ${Hashtag.id}" class="showHashtags"
+                                    th:text="${Hashtag.name}">
+
+                            </a>
+                        </li>
+                    </ul>
+                </article>
+
             </section>
         </main>
     </div>
