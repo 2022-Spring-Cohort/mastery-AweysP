@@ -1,6 +1,8 @@
 package com.survivingcodingbootcamp.blog.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 public class Post {
@@ -10,8 +12,11 @@ public class Post {
     private String title;
     @ManyToOne
     private Topic topic;
+    @ManyToMany
+    private Collection<Hashtag> hashtags;
     @Lob
     private String content;
+
 
     protected Post() {
     }
@@ -20,6 +25,10 @@ public class Post {
         this.title = title;
         this.topic = topic;
         this.content = content;
+        this.hashtags = new ArrayList<Hashtag>();
+    }
+    public void addHashtag(Hashtag hashtag){
+        hashtags.add(hashtag);
     }
 
     public Long getId() {
@@ -36,6 +45,10 @@ public class Post {
 
     public String getContent() {
         return content;
+    }
+
+    public Collection<Hashtag> getHashtags() {
+        return hashtags;
     }
 
     @Override
